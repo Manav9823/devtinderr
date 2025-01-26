@@ -1,10 +1,16 @@
+import { setUser } from '@/store/slices/user';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
+
 const login = () => {
-    const [email, setEmail] = useState("Raju@gmail.com")
-    const [password, setPassword] = useState("Raju@123")
+    const [email, setEmail] = useState("Tilak@gmail.com")
+    const [password, setPassword] = useState("Tilak@123")
+    const router = useRouter()
+    const dispatch = useDispatch()
 
     const handleLogin = async () => {
         console.log(email, password)
@@ -14,15 +20,21 @@ const login = () => {
                 body: JSON.stringify({emailId: email, password}),
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: "include"
             }) 
+            if(!response.ok){
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Something went wrong');
+            }
             const data = await response.json()
-            // console.log(data.message)
-            console.log(data.data)
+            console.log('data', data)
+            dispatch(setUser(data.data))
             toast(data.message)
+            router.push('/')
         } catch(err) {
             console.log(err)
-            toast(err)
+            toast('Error while logging in please check your email and pasword')
         }
     }
   return (

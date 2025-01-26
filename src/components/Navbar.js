@@ -1,16 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
+    const user = useSelector((state) => state.user)
+    console.log('user value here', user.user)
   return (
     <div className="navbar bg-base-100">
         <div className="flex-1">
             <Link href="/" className="btn btn-ghost text-xl">devTinderr</Link>
         </div>
         <div className="flex-none gap-2">
-            
-            <div className="dropdown dropdown-end mr-10">
+            {user.user && <div className="dropdown dropdown-end mr-10">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                 <img
@@ -31,7 +33,7 @@ const Navbar = () => {
                 <li><a>Settings</a></li>
                 <li><a>Logout</a></li>
             </ul>
-            </div>
+            </div>}
         </div>
     </div>
   )
