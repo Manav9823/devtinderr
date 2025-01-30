@@ -1,12 +1,13 @@
 import { setUser } from '@/store/slices/user';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
 
 const login = () => {
+    console.log('Inside login')
     const [email, setEmail] = useState("Tilak@gmail.com")
     const [password, setPassword] = useState("Tilak@123")
     const router = useRouter()
@@ -37,6 +38,31 @@ const login = () => {
             toast('Error while logging in please check your email and pasword')
         }
     }
+
+    const checkUserLoggedIn = async() => {
+        try{
+            const response = await fetch('http://localhost:7777/profile', {
+            method: "GET", 
+            credentials: "include"
+            })
+            if(!response.ok) {
+                const data = response.json()
+                throw new Error('Token Not present')
+            }
+            const data = await response.json()
+            console.log('data', data)
+            router.push('/')
+        } catch(err) {
+            router.push('/login')
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        // checkUserLoggedIn()
+    }, [])
+
+
   return (
     <>
     <ToastContainer/>
