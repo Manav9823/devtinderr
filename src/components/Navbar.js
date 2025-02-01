@@ -12,7 +12,7 @@ const Navbar = () => {
     const router = useRouter()
     const dispatch = useDispatch()
 
-    console.log('user value here', user?.user)
+    // console.log('user value here', user?.user)
     const handleLogout = async() => {
         console.log('inside logout')
         try{

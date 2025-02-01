@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const Connections = () => {
     const [allConnections, setAllConnections] = useState([{}])
     const router = useRouter()
+    const user = useSelector(state => state.user.user)
     const getAllConnections = async() => {
         try {
             console.log('inside get all connecitons')
@@ -20,6 +22,7 @@ const Connections = () => {
         }
     }
     const openChatWindow = (chatWith) => {
+        console.log('manav', chatWith)
         router.push(`/chat/${chatWith}`)
     }
     useEffect(() => {
@@ -32,8 +35,13 @@ const Connections = () => {
             return (<div className='shadow-lg rounded-lg bg-gray-300 p-10 flex'>
                 <Image src='/profile.webp'height={100} width={100} alt='image' className='w-20 h-full mr-5'/>
                 <div className='flex flex-col'>
-                    <h1 className='text-[20px] font-semibold font-serif'>{connection?.fromUserId?.firstName + " " + connection?.fromUserId?.lastName}</h1>
-                    <button className='btn btn-primary' onClick={() => openChatWindow(connection?.fromUserId?._id)}>Chat Now</button>
+                    <h1 className='text-[20px] font-semibold font-serif'>{connection?.fromUserId?._id !== user._id ?  
+                    connection?.fromUserId?.firstName + " " + connection?.fromUserId?.lastName : 
+                    connection?.toUserId?.firstName + " " + connection?.toUserId?.lastName }</h1>
+                    <button className='btn btn-primary' onClick={() => 
+                        openChatWindow(connection?.fromUserId?._id !== user._id  
+                        ? connection?.fromUserId?._id : 
+                          connection?.toUserId?._id)}>Chat Now</button>
                 </div>
             </div>)
         })}
