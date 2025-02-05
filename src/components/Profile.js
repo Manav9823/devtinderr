@@ -7,11 +7,11 @@ const Profile = () => {
   console.log('inside profile')
 
   const selector = useSelector((state) => state.user.user)
-  const [emailId, setEmailId] = useState(selector.emailId)
-  const [password, setPassword] = useState(selector.password)
-  const [firstName, setFirstName] = useState(selector.firstName)
-  const [lastName, setLastName] = useState(selector.lastName)
-  const [about, setAbout] = useState(selector.about)
+  const [emailId, setEmailId] = useState(selector?.emailId)
+  const [password, setPassword] = useState(selector?.password)
+  const [firstName, setFirstName] = useState(selector?.firstName)
+  const [lastName, setLastName] = useState(selector?.lastName)
+  const [about, setAbout] = useState(selector?.about)
 
   console.log('data here is ',selector)
   const fetchUserProfile = async() =>{
