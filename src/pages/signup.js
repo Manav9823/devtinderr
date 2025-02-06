@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/utils/constants';
 import Link from 'next/link';
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,7 +11,7 @@ const signup = () => {
     const handleSignup = async () => {
             console.log(firstName, lastName, email, password)
             try{
-                const response = await fetch('http://localhost:7777/signup', {
+                const response = await fetch(BASE_URL + '/signup', {
                     method: 'POST', 
                     body: JSON.stringify({firstName, lastName, emailId: email, password}),
                     headers: {

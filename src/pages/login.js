@@ -1,4 +1,5 @@
 import { setUser } from '@/store/slices/user';
+import { BASE_URL } from '@/utils/constants';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -16,7 +17,7 @@ const login = () => {
     const handleLogin = async () => {
         console.log(email, password)
         try{
-            const response = await fetch('http://localhost:7777/login', {
+            const response = await fetch(BASE_URL + '/login', {
                 method: 'POST', 
                 body: JSON.stringify({emailId: email, password}),
                 headers: {
@@ -41,7 +42,7 @@ const login = () => {
 
     const checkUserLoggedIn = async() => {
         try{
-            const response = await fetch('http://localhost:7777/profile', {
+            const response = await fetch(BASE_URL + '/profile', {
             method: "GET", 
             credentials: "include"
             })

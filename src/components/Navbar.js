@@ -1,4 +1,5 @@
 import { removeUser, setUser } from '@/store/slices/user'
+import { BASE_URL } from '@/utils/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -16,7 +17,7 @@ const Navbar = () => {
     const handleLogout = async() => {
         console.log('inside logout')
         try{
-            await fetch('http://localhost:7777/logout', {
+            await fetch(BASE_URL + '/logout', {
                 method: 'GET', 
                 credentials: "include"
             })

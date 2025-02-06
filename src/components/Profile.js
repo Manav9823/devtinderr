@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/utils/constants'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -18,7 +19,7 @@ const Profile = () => {
     console.log('Inside fetch user Profile')
     try {
       console.log('inside this')
-      const response = await fetch('http://localhost:7777/feed', {
+      const response = await fetch(BASE_URL + '/feed', {
         method: 'GET',
         credentials: "include"
       })
@@ -31,7 +32,7 @@ const Profile = () => {
 
   const handleProfileUpdate = async () => {
     try {
-      const response = await fetch('http://localhost:7777/updateUser', {
+      const response = await fetch(BASE_URL + '/updateUser', {
         method: 'PATCH',
         credentials: 'include',
         body: JSON.stringify({

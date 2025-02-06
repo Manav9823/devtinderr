@@ -4,6 +4,7 @@ import Footer from './Footer'
 import { useDispatch } from 'react-redux'
 import { setUser } from '@/store/slices/user'
 import { useRouter } from 'next/navigation'
+import { BASE_URL } from '@/utils/constants'
 
 const Layout = ({children}) => {
   console.log('Inside layout')
@@ -12,7 +13,7 @@ const Layout = ({children}) => {
   const fetchProfileData = async() => {
     console.log('Inside fetch Profile')
     try{
-      const response = await fetch('http://localhost:7777/profile', {
+      const response = await fetch(BASE_URL + '/profile', {
         method: "GET", 
         credentials: "include"
       })

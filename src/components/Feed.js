@@ -3,6 +3,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import FeedCard from './FeedCard'
 import { useDispatch } from 'react-redux'
 import { addFeed } from '@/store/slices/feed'
+import { BASE_URL } from '@/utils/constants'
 
 const Feed = () => {
 
@@ -11,7 +12,7 @@ const Feed = () => {
 
     const getFeedOfUser = async() => {
         try {
-            const data = await fetch('http://localhost:7777/feed', {
+            const data = await fetch(BASE_URL + '/feed', {
                 method: 'GET',
                 credentials: "include"
             })

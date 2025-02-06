@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Chat from './Chat'
 import chatWith from '@/pages/chat/[chatWith]'
+import { BASE_URL } from '@/utils/constants'
 
 const Connections = () => {
     const [allConnections, setAllConnections] = useState([{}])
@@ -15,7 +16,7 @@ const Connections = () => {
     const getAllConnections = async() => {
         try {
             console.log('inside get all connecitons')
-            const response = await fetch('http://localhost:7777/getAllConnections',{
+            const response = await fetch(BASE_URL + '/getAllConnections',{
                 method: 'GET',
                 credentials: 'include'
             })

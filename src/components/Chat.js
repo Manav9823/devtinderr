@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/utils/constants'
 import { createSocketConnection } from '@/utils/socket'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -58,7 +59,7 @@ const Chat = ({chatWith, name}) => {
     }, [userId, chatWith])
 
     const getAllMessages = async() => {
-        const response = await fetch(`http://localhost:7777/getMessages/${chatWith}`, {
+        const response = await fetch(BASE_URL + `/${chatWith}`, {
             method: 'GET',
             credentials: 'include'
         })
